@@ -17,7 +17,7 @@ site:
   name: ruattd # 作者名称 - 请修改为你的名字
   description: 🍰 / BE / INTJ / ACG / 🍏 / 米游玩家 / 下落式狂魔 # 网站描述
   avatar: /img/avatar.webp # 网站头像
-  showLogo: true # 是否显示 Logo
+  showLogo: false # 是否显示 Logo
   author: ruattd # 作者名称 - 请修改为你的名字
   url: https://blog.rqwq.link # 站点 URL 用于 RSS 和 SEO
   startYear: 2026 # 建站年份
