@@ -40,7 +40,7 @@ site:
 # =============================================================================
 categoryMap:
   # Primary categories
-  生活: life
+  随笔: life
   笔记: note
   安利: recommend
   # Secondary categories (for nested paths)
@@ -64,7 +64,7 @@ featuredCategories:
   - link: note/dotnet
     label: .NET
     image: /img/cover/2.webp
-    description: 技术笔记、学习笔记
+    description: .NET 相关技术笔记
   - link: life # 对应 categoryMap 中 随笔: life
     label: 随笔
     image: /img/cover/4.webp
@@ -72,7 +72,7 @@ featuredCategories:
   - link: note/algorithm
     label: 算法
     image: /img/cover/1.webp
-    description: 前端技术相关
+    description: 算法/底层优化相关
   - link: recommend
     label: 安利
     image: /img/cover/11.webp
