@@ -447,7 +447,7 @@ comment:
     requiredMeta:                    # 必填字段 (默认: [])
       - nick
       - mail
-    login: enable                    # 登录模式 ('enable' | 'disable' | 'force', 默认: 'enable')
+    login: disable                    # 登录模式 ('enable' | 'disable' | 'force', 默认: 'enable')
     wordLimit: [1, 256]                     # 评论字数限制 (0 = 无限制, 默认: 0)
                                      # 可选: 单个数字 | [min, max] 数组
     pageSize: 10                     # 每页评论数 (默认: 10)
@@ -471,8 +471,8 @@ comment:
     pageview: true                   # 页面访问量统计 (默认: true)
     # recaptchaV3Key: ''             # reCAPTCHA v3 Key (可选)
     turnstileKey: '0x4AAAAAACNM3o8FTZHCxp3f'               # Cloudflare Turnstile Key (可选)
-    # locale:                        # 自定义语言显示 (可选)
-    #   placeholder: '请留言...'      # 自定义输入框占位文本
+    locale:                        # 自定义语言显示 (可选)
+      placeholder: '本评论区仅允许简短文本，图片或过长的文本请使用外链哦'      # 自定义输入框占位文本
 
 # =============================================================================
 # Analytics (Umami)
