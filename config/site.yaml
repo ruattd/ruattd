@@ -11,21 +11,26 @@
 # Site Basic Information
 # =============================================================================
 site:
-  title: 余弦の博客 # 网站名称
-  alternate: cosine # 网站英文名称 用于页脚、Logo、@ handle 等
-  subtitle: WA 的一声就哭了 # 网站副标题
-  name: cos # 作者名称 - 请修改为你的名字
-  description: 一个基于 Astro 的现代化博客主题 # 网站描述
+  title: 天天的糖果屋 # 网站名称
+  alternate: ruasweet # 网站英文名称 用于页脚、Logo、@ handle 等
+  subtitle: Walk softly through the world # 网站副标题
+  name: ruattd # 作者名称 - 请修改为你的名字
+  description: 🍰 / BE / INTJ / ACG / 🍏 / 米游玩家 / 下落式狂魔 # 网站描述
   avatar: /img/avatar.webp # 网站头像
   showLogo: true # 是否显示 Logo
-  author: Author # 作者名称 - 请修改为你的名字
-  url: https://koharu.cosine.ren # 站点 URL 用于 RSS 和 SEO
-  startYear: 2024 # 建站年份
+  author: ruattd # 作者名称 - 请修改为你的名字
+  url: https://blog.rqwq.link # 站点 URL 用于 RSS 和 SEO
+  startYear: 2026 # 建站年份
   keywords: # SEO 关键词
     - 博客
-    - Astro
+    - .NET
+    - C#
+    - Rust
     - 技术
-    - 前端
+    - 生活
+    - 随笔
+    - 编程
+    - 开发
     # 请根据你的网站内容添加关键词
 
 # =============================================================================
@@ -35,17 +40,15 @@ site:
 # =============================================================================
 categoryMap:
   # Primary categories
-  随笔: life
+  生活: life
   笔记: note
-  工具: tools
-  周刊: weekly
+  安利: recommend
   # Secondary categories (for nested paths)
-  前端: front-end
-  # Add more as needed:
-  # 书摘: reading
-  # 后端: back-end
-  # 算法: algorithm
-  # 项目: project
+  日常: daily
+  .NET: dotnet
+  算法: algorithm
+  前端: frontend
+  后端: backend
 
 # =============================================================================
 # Featured Categories (Homepage)
@@ -59,19 +62,19 @@ categoryMap:
 # -----------------------------------------------------------------------------
 featuredCategories:
   - link: life # 对应 categoryMap 中 随笔: life
-    label: 随笔
+    label: 生活
     image: /img/cover/2.webp
     description: 生活记录、随想随笔
-  - link: note # 对应 categoryMap 中 笔记: note
-    label: 笔记
+  - link: note/dotnet
+    label: .NET
     image: /img/cover/4.webp
     description: 技术笔记、学习笔记
-  - link: note/front-end # 嵌套分类：笔记/前端
-    label: 前端
+  - link: note/algorithm
+    label: 算法
     image: /img/cover/1.webp
     description: 前端技术相关
-  - link: tools # 对应 categoryMap 中 工具: tools
-    label: 工具
+  - link: recommend
+    label: 安利
     image: /img/cover/11.webp
     description: 工具使用、效率提升
 
@@ -92,21 +95,21 @@ featuredCategories:
 #   highlightOnHome: 是否在首页高亮显示最新文章（可选，默认 true，显式设为 false 可禁用）
 #   links: 相关链接配置（可选）
 # -----------------------------------------------------------------------------
-featuredSeries:
-  - slug: weekly # URL 路径: /weekly
-    categoryName: 周刊 # 必须与 categoryMap 中的分类名匹配
-    label: 我的周刊 # 简短名称
-    fullName: 我的技术周刊 # 完整名称
-    description: | # 支持多行 Markdown
-      这是周刊/系列文章功能的示例配置。
-      你可以用它来发布定期更新的系列内容，如技术周刊、读书笔记系列等。
-      设置 enabled: false 可以关闭此功能。
-    cover: /img/weekly_header.webp # 系列页面头图
-    enabled: true # 启用此系列
-    icon: ri:newspaper-line # 导航图标
-    links: # 相关链接（可选）
-      github: https://github.com/your-username/your-repo # (可选) GitHub 仓库
-      rss: /rss.xml # (可选) RSS 订阅链接
+featuredSeries: []
+  # - slug: weekly # URL 路径: /weekly
+  #   categoryName: 周刊 # 必须与 categoryMap 中的分类名匹配
+  #   label: 我的周刊 # 简短名称
+  #   fullName: 我的技术周刊 # 完整名称
+  #   description: | # 支持多行 Markdown
+  #     这是周刊/系列文章功能的示例配置。
+  #     你可以用它来发布定期更新的系列内容，如技术周刊、读书笔记系列等。
+  #     设置 enabled: false 可以关闭此功能。
+  #   cover: /img/weekly_header.webp # 系列页面头图
+  #   enabled: true # 启用此系列
+  #   icon: ri:newspaper-line # 导航图标
+  #   links: # 相关链接（可选）
+  #     github: https://github.com/your-username/your-repo # (可选) GitHub 仓库
+  #     rss: /rss.xml # (可选) RSS 订阅链接
       # chrome: https://chromewebstore.google.com/detail/your-extension-id # (可选) 浏览器插件
       # docs: https://your-docs-url # (可选) 文档链接
   # 示例：添加第二个系列（取消注释启用）
@@ -133,11 +136,11 @@ featuredSeries:
 # -----------------------------------------------------------------------------
 social:
   github:
-    url: https://github.com/your-username # 替换为你的 GitHub 链接
+    url: https://github.com/ruattd # 替换为你的 GitHub 链接
     icon: ri:github-fill # Remix Icon 的 GitHub 图标
     color: '#191717' # (可选) 图标颜色
   email:
-    url: mailto:your@email.com # 替换为你的邮箱，需加 mailto: 前缀
+    url: mailto:ruattqwq@gmail.com # 替换为你的邮箱，需加 mailto: 前缀
     icon: ri:mail-line
     color: '#55acd5'
   rss:
@@ -202,24 +205,24 @@ friends:
       desc: FE / ACG / 手工 / 深色模式强迫症 / INFP / 兴趣广泛养两只猫的老宅女 / remote
       image: https://blog.cosine.ren/img/avatar.webp
       color: '#ed788b'
-    - site: 示例博客 A
-      url: https://example-a.com
-      owner: Alice
-      desc: 一个热爱技术的开发者
-      image: https://api.dicebear.com/7.x/avataaars/svg?seed=Alice
-      color: '#BEDCFF'
-    - site: 示例博客 B
-      url: https://example-b.com
-      owner: Bob
-      desc: 分享生活与技术的小站
-      image: https://api.dicebear.com/7.x/avataaars/svg?seed=Bob
-      color: '#FBC1CC'
-    - site: 示例博客 C
-      url: https://example-c.com
-      owner: Carol
-      desc: 记录学习与成长的地方
-      image: https://api.dicebear.com/7.x/avataaars/svg?seed=Carol
-      color: '#ABDCFF'
+    # - site: 示例博客 A
+    #   url: https://example-a.com
+    #   owner: Alice
+    #   desc: 一个热爱技术的开发者
+    #   image: https://api.dicebear.com/7.x/avataaars/svg?seed=Alice
+    #   color: '#BEDCFF'
+    # - site: 示例博客 B
+    #   url: https://example-b.com
+    #   owner: Bob
+    #   desc: 分享生活与技术的小站
+    #   image: https://api.dicebear.com/7.x/avataaars/svg?seed=Bob
+    #   color: '#FBC1CC'
+    # - site: 示例博客 C
+    #   url: https://example-c.com
+    #   owner: Carol
+    #   desc: 记录学习与成长的地方
+    #   image: https://api.dicebear.com/7.x/avataaars/svg?seed=Carol
+    #   color: '#ABDCFF'
 
 # =============================================================================
 # Announcements
@@ -318,10 +321,8 @@ navigation:
   - name: 首页 # 菜单显示名称
     path: / # 链接路径
     icon: ri:home-heart-fill # 图标
-  # - name: 书摘
-  #   path: /reading
-  - name: 周刊
-    path: /weekly
+  - name: 生活
+    path: /life
     icon: ri:newspaper-line
   - name: 文章 # 有子菜单时，path 可省略
     icon: ri:quill-pen-ai-fill
@@ -421,7 +422,7 @@ navigation:
 #     turnstileKey: Cloudflare Turnstile Key (可选)
 #     locale: 自定义语言显示 (可选)
 comment:
-  provider: none  # 'remark42' | 'giscus' | 'waline' | 'none'
+  provider: waline  # 'remark42' | 'giscus' | 'waline' | 'none'
   # remark42:
   #   host: https://comment.example.com/
   #   siteId: your-site-id
@@ -436,43 +437,44 @@ comment:
   #   inputPosition: top               # 输入框位置 ('top' | 'bottom')
   #   lang: zh-CN                      # 语言
 
-  # waline:
-  #   serverURL: https://your-waline.vercel.app  # Waline 服务端地址 (必填)
-  #   lang: zh-CN                      # 语言 (默认: 'zh-CN')
-  #   dark: html.dark                  # 暗黑模式 (默认: 'html.dark')
-  #                                    # 可选: true (自适应) | false (禁用) | CSS选择器字符串
-  #   meta:                            # 评论者信息字段 (默认: ['nick', 'mail', 'link'])
-  #     - nick
-  #     - mail
-  #     - link
-  #   requiredMeta:                    # 必填字段 (默认: [])
-  #     - nick
-  #   login: enable                    # 登录模式 ('enable' | 'disable' | 'force', 默认: 'enable')
-  #   wordLimit: 0                     # 评论字数限制 (0 = 无限制, 默认: 0)
-  #                                    # 可选: 单个数字 | [min, max] 数组
-  #   pageSize: 10                     # 每页评论数 (默认: 10)
-  #   imageUploader: false             # 图片上传功能 (默认: false)
-  #   highlighter: true                # 代码高亮 (默认: true)
-  #   texRenderer: false               # LaTeX 渲染 (默认: false)
-  #   search: false                    # 搜索功能 (默认: false)
-  #   reaction: false                  # 文章反应功能 (默认: false)
-  #                                    # 可选: true | false | 字符串数组 (自定义反应图标)
-  #   emoji: true                      # 表情包配置 (默认: ['//unpkg.com/@waline/emojis@1.2.0/weibo'])
-  #                                    # 可选: true | false | 字符串/对象数组
-  #                                    # 预设表情包: '//unpkg.com/@waline/emojis@1.2.0/weibo'
-  #                                    #           '//unpkg.com/@waline/emojis@1.2.0/alus'
-  #                                    #           '//unpkg.com/@waline/emojis@1.2.0/bilibili'
-  #                                    #           '//unpkg.com/@waline/emojis@1.2.0/qq'
-  #                                    #           '//unpkg.com/@waline/emojis@1.2.0/tieba'
-  #                                    #           '//unpkg.com/@waline/emojis@1.2.0/tw-emoji'
-  #   commentSorting: latest           # 评论排序 ('latest' | 'oldest' | 'hottest', 默认: 'latest')
-  #   noCopyright: false               # 隐藏页脚版权信息 (默认: false)
-  #   comment: true                    # 评论数统计 (默认: true)
-  #   pageview: true                   # 页面访问量统计 (默认: true)
-  #   # recaptchaV3Key: ''             # reCAPTCHA v3 Key (可选)
-  #   # turnstileKey: ''               # Cloudflare Turnstile Key (可选)
-  #   # locale:                        # 自定义语言显示 (可选)
-  #   #   placeholder: '请留言...'      # 自定义输入框占位文本
+  waline:
+    serverURL: https://waline.blog.rqwq.link  # Waline 服务端地址 (必填)
+    lang: zh-CN                      # 语言 (默认: 'zh-CN')
+    dark: html.dark                  # 暗黑模式 (默认: 'html.dark')
+                                     # 可选: true (自适应) | false (禁用) | CSS选择器字符串
+    meta:                            # 评论者信息字段 (默认: ['nick', 'mail', 'link'])
+      - nick
+      - mail
+      - link
+    requiredMeta:                    # 必填字段 (默认: [])
+      - nick
+      - mail
+    login: enable                    # 登录模式 ('enable' | 'disable' | 'force', 默认: 'enable')
+    wordLimit: [1, 256]                     # 评论字数限制 (0 = 无限制, 默认: 0)
+                                     # 可选: 单个数字 | [min, max] 数组
+    pageSize: 10                     # 每页评论数 (默认: 10)
+    imageUploader: false             # 图片上传功能 (默认: false)
+    highlighter: true                # 代码高亮 (默认: true)
+    texRenderer: false               # LaTeX 渲染 (默认: false)
+    search: false                    # 搜索功能 (默认: false)
+    reaction: false                  # 文章反应功能 (默认: false)
+                                     # 可选: true | false | 字符串数组 (自定义反应图标)
+    emoji: true                      # 表情包配置 (默认: ['//unpkg.com/@waline/emojis@1.2.0/weibo'])
+                                     # 可选: true | false | 字符串/对象数组
+                                     # 预设表情包: '//unpkg.com/@waline/emojis@1.2.0/weibo'
+                                     #           '//unpkg.com/@waline/emojis@1.2.0/alus'
+                                     #           '//unpkg.com/@waline/emojis@1.2.0/bilibili'
+                                     #           '//unpkg.com/@waline/emojis@1.2.0/qq'
+                                     #           '//unpkg.com/@waline/emojis@1.2.0/tieba'
+                                     #           '//unpkg.com/@waline/emojis@1.2.0/tw-emoji'
+    commentSorting: latest           # 评论排序 ('latest' | 'oldest' | 'hottest', 默认: 'latest')
+    noCopyright: false               # 隐藏页脚版权信息 (默认: false)
+    comment: true                    # 评论数统计 (默认: true)
+    pageview: true                   # 页面访问量统计 (默认: true)
+    # recaptchaV3Key: ''             # reCAPTCHA v3 Key (可选)
+    turnstileKey: '0x4AAAAAACNM3o8FTZHCxp3f'               # Cloudflare Turnstile Key (可选)
+    # locale:                        # 自定义语言显示 (可选)
+    #   placeholder: '请留言...'      # 自定义输入框占位文本
 
 # =============================================================================
 # Analytics (Umami)
@@ -484,8 +486,8 @@ comment:
 analytics:
   umami:
     enabled: true
-    id: your-umami-id
-    endpoint: https://stats.example.com
+    id: 112d1d90-7e99-4909-a8e2-3276503f9c27
+    endpoint: https://api.umami.is
 
 # =============================================================================
 # Christmas/Seasonal Features
