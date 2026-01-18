@@ -12,8 +12,8 @@
 # =============================================================================
 site:
   title: 天天的糖果屋 # 网站名称
-  alternate: ruasweet # 网站英文名称 用于页脚、Logo、@ handle 等
-  subtitle: Walk softly through the world # 网站副标题
+  alternate: RuaSweety # 网站英文名称 用于页脚、Logo、@ handle 等
+  subtitle: Walk softly through the world. # 网站副标题
   name: ruattd # 作者名称 - 请修改为你的名字
   description: 🍰 / BE / INTJ / ACG / 🍏 / 米游玩家 / 下落式狂魔 # 网站描述
   avatar: /img/avatar.webp # 网站头像
@@ -61,14 +61,14 @@ categoryMap:
 #   description: 分类描述文字，显示在卡片上
 # -----------------------------------------------------------------------------
 featuredCategories:
-  - link: life # 对应 categoryMap 中 随笔: life
-    label: 生活
-    image: /img/cover/2.webp
-    description: 生活记录、随想随笔
   - link: note/dotnet
     label: .NET
-    image: /img/cover/4.webp
+    image: /img/cover/2.webp
     description: 技术笔记、学习笔记
+  - link: life # 对应 categoryMap 中 随笔: life
+    label: 随笔
+    image: /img/cover/4.webp
+    description: 生活记录、随想随笔
   - link: note/algorithm
     label: 算法
     image: /img/cover/1.webp
@@ -95,18 +95,16 @@ featuredCategories:
 #   highlightOnHome: 是否在首页高亮显示最新文章（可选，默认 true，显式设为 false 可禁用）
 #   links: 相关链接配置（可选）
 # -----------------------------------------------------------------------------
-featuredSeries: []
-  # - slug: weekly # URL 路径: /weekly
-  #   categoryName: 周刊 # 必须与 categoryMap 中的分类名匹配
-  #   label: 我的周刊 # 简短名称
-  #   fullName: 我的技术周刊 # 完整名称
-  #   description: | # 支持多行 Markdown
-  #     这是周刊/系列文章功能的示例配置。
-  #     你可以用它来发布定期更新的系列内容，如技术周刊、读书笔记系列等。
-  #     设置 enabled: false 可以关闭此功能。
-  #   cover: /img/weekly_header.webp # 系列页面头图
-  #   enabled: true # 启用此系列
-  #   icon: ri:newspaper-line # 导航图标
+featuredSeries:
+  - slug: life # URL 路径: /weekly
+    categoryName: 随笔 # 必须与 categoryMap 中的分类名匹配
+    label: 日常随笔 # 简短名称
+    fullName: 记录生活的日常随笔 # 完整名称
+    description: | # 支持多行 Markdown
+      记录生活中的点滴，分享个人的见闻与感悟。
+    cover: /img/weekly_header.webp # 系列页面头图
+    enabled: true # 启用此系列
+    icon: ri:newspaper-line # 导航图标
   #   links: # 相关链接（可选）
   #     github: https://github.com/your-username/your-repo # (可选) GitHub 仓库
   #     rss: /rss.xml # (可选) RSS 订阅链接
@@ -321,7 +319,7 @@ navigation:
   - name: 首页 # 菜单显示名称
     path: / # 链接路径
     icon: ri:home-heart-fill # 图标
-  - name: 生活
+  - name: 随笔
     path: /life
     icon: ri:newspaper-line
   - name: 文章 # 有子菜单时，path 可省略
