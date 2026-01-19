@@ -6,6 +6,9 @@ categories:
   - [笔记, .NET]
 tags:
   - .NET
+  - C#
+  - CLR
+  - 内存
 ---
 
 ## 简介
