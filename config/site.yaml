@@ -239,6 +239,12 @@ friends:
       desc: 可爱就是正义~
       image: https://cdn.jsdelivr.net/gh/Revincx/blog-assets@master/images/avatar.jpg
       color: '#49b1f5'
+    - site: 🍋小Tの博客
+      url: https://blog.sin.moe/
+      owner: 🍋小T
+      desc: 只恨年少，不知路遥。
+      image: https://blog.sin.moe/img/avatar.webp
+      color: '#f6b171'
     # - site: 示例博客 A
     #   url: https://example-a.com
     #   owner: Alice
