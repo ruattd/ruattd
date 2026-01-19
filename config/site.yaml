@@ -233,6 +233,12 @@ friends:
       desc: 也许我们会分别，但我们将永远不会忘记彼此
       image: https://blog-api.lihaoyu.cn/images/profile/avatar-128x.webp
       color: '#ffe08b'
+    - site: Revincx的小破站
+      url: https://blog.revincx.icu
+      owner: Revincx
+      desc: 可爱就是正义~
+      image: https://cdn.jsdelivr.net/gh/Revincx/blog-assets@master/images/avatar.jpg
+      color: '#49b1f5'
     # - site: 示例博客 A
     #   url: https://example-a.com
     #   owner: Alice
