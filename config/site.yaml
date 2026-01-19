@@ -489,7 +489,7 @@ comment:
     requiredMeta:                    # 必填字段 (默认: [])
       - nick
       - mail
-    login: disable                    # 登录模式 ('enable' | 'disable' | 'force', 默认: 'enable')
+    login: enable                    # 登录模式 ('enable' | 'disable' | 'force', 默认: 'enable')
     wordLimit: [1, 256]                     # 评论字数限制 (0 = 无限制, 默认: 0)
                                      # 可选: 单个数字 | [min, max] 数组
     pageSize: 10                     # 每页评论数 (默认: 10)
