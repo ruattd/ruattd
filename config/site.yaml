@@ -15,7 +15,7 @@ site:
   alternate: RuaSweety # 网站英文名称 用于页脚、Logo、@ handle 等
   subtitle: Walk softly through the world. # 网站副标题
   name: ruattd # 作者名称 - 请修改为你的名字
-  description: 🍰 / BE / INTJ / ACG / 🍏 / 米游玩家 / 下落式狂魔 # 网站描述
+  description: 🍰 / .NET / BE / INTJ / ACG / 🍏 / 米游玩家 / 下落式狂魔 # 网站描述
   avatar: /img/avatar.webp # 网站头像
   showLogo: false # 是否显示 Logo
   author: ruattd # 作者名称 - 请修改为你的名字
@@ -185,16 +185,16 @@ social:
 # -----------------------------------------------------------------------------
 friends:
   intro:
-    title: 友情链接 # 页面标题
+    title: 友人帐 # 页面标题
     subtitle: 欢迎交换友链！ # 页面副标题
     applyTitle: 申请友链 # 申请区块标题
     applyDesc: 请在本页留言，格式如下 # 申请说明
     exampleYaml: | # 申请格式示例，会显示在页面上
-      - site: 你的博客名称 # 站点名称
-        url: https://your-blog.com/ # 站点网址
-        owner: 你的昵称 # 昵称
-        desc: 站点简介 # 站点简介
-        image: https://your-blog.com/avatar.jpg # 头像链接
+      - site: 天天的糖果屋 # 站点名称
+        url: https://blog.rqwq.link # 站点网址
+        owner: ruattd # 昵称
+        desc: Walk softly through the world. # 站点简介
+        image: https://blog.rqwq.link/img/avatar.webp # 头像链接
         color: "#ffc0cb" # 主题色（可选）
   data: # 友链列表
     - site: 余弦の博客
@@ -203,6 +203,36 @@ friends:
       desc: FE / ACG / 手工 / 深色模式强迫症 / INFP / 兴趣广泛养两只猫的老宅女 / remote
       image: https://blog.cosine.ren/img/avatar.webp
       color: '#ed788b'
+    - site: TheSw1mの小窝
+      url: https://blog.swimgit.top
+      owner: TheSw1m
+      desc: 在深蓝中游弋
+      image: https://blog.swimgit.top/images/main-avatar.webp
+      color: '#739ad4'
+    - site: Krau's Blog
+      url: https://krau.top
+      owner: Krau
+      desc: 子供の时の梦は言えますか
+      image: https://krau.top/photo/avatar/avatar.jpg
+      color: '#39c5bb'
+    - site: 喵梦の樱间絮语
+      url: https://baka.host
+      owner: 花月喵梦
+      desc: A baka blog
+      image: https://cravatar.com/avatar/891edfdcf8c0aaad8b3cd6462ae6eaa83dae960e80d1910d3a9cddb1d7fc55fa?s=512&r=pg
+      color: '#919191'
+    - site: 夏鸢的波子汽水店
+      url: https://owo.today
+      owner: 夏鸢
+      desc: 直视平庸，保持谦逊
+      image: https://owo.today/assets/avatar.avif
+      color: '#d96e80'
+    - site: 晓雨杂记
+      url: https://www.lihaoyu.cn
+      owner: Big_Cake
+      desc: 也许我们会分别，但我们将永远不会忘记彼此
+      image: https://blog-api.lihaoyu.cn/images/profile/avatar-128x.webp
+      color: '#ffe08b'
     # - site: 示例博客 A
     #   url: https://example-a.com
     #   owner: Alice
