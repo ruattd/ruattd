@@ -9,7 +9,7 @@ tags:
   - .NET
 ---
 
-说到**正则表达式**这一老生常谈的话题，最容易被提及的就是它的性能——由于需要将字符串形式的表达式即时翻译成逻辑结构，这东西在实际使用时经常会以各种姿态浪费性能，甚至于有人宁肯自己写一堆 if-else 都不肯使用正则表达式，就为了不浪费那巨大的翻译性能代价。
+说到**正则表达式**这一老生常谈的话题，最容易被提及的就是它的性能——由于需要将字符串形式的表达式即时翻译成逻辑结构，这东西在实际使用时经常会以各种姿态浪费性能，甚至于有人宁肯自己写一堆 if-else 都不肯使用正则表达式，就为了避免巨大的翻译性能代价。
 
 那么，有没有什么办法可以优化正则表达式的性能嘞？
 
@@ -46,7 +46,7 @@ public static partial class RegexCollect
 public GeneratedRegexAttribute([StringSyntax("Regex", new object[] {"options"})] string pattern, RegexOptions options);
 ```
 
-观察可知，使用时只需传入与 `Regex` 的构造方法相同的两个参数 `pattern` `options` 即可。需要特别注意的是：这里的 `options` 传入 `RegexOptions.Compiled` 是没有任何作用的，因为它本身就已经是预先编译了。
+观察可知，使用时只需传入与 `Regex` 的构造方法相同的两个参数 `pattern` `options` 即可。需要特别注意的是：这里的 `options` 传入 `RegexOptions.Compiled` 是没有任何作用的，因为它本身就已经是预编译了。
 
 上述代码会触发源生成器生成以下内容：
 

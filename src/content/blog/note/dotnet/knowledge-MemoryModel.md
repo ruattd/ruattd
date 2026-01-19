@@ -77,6 +77,93 @@ data
 
 这个原则在 C++ / Java 等等各种语言中也能见到，基本可以说是个计算机界的标准了。
 
+## 栈与堆的使用策略
+
+我们暂且忽略在具体分配时的方法签名及返回值等基本部分，栈通常存储**值类型本身**和**指向引用类型的引用**，而堆通常存储各处的引用对应的**实际对象数据**。
+
+说到这里，就不得不提一下 .NET CLR 中存在的两个重要概念：值类型、引用类型。
+
+以 C# 为例，**值类型**就是使用 `struct` 声明的类型，而**引用类型**则是使用 `class` 及变体 `record` 声明的类型。特殊的 `enum` 在正常使用时是值类型，但实际上是引用类型（在某些情况下也会自动变为引用类型），这是一种性能优化，此处暂且不详细展开。
+
+特别地，C# 中包含了很多基本数据类型关键字，例如 `int` `long` `short` `byte` `float` `double` 等。这些关键字实际上是指向 CLR 值类型的语法糖，例如 `int` 实际上是 `System.Int32`，`long` 实际上是 `System.Int64`，`double` 实际上是 `System.Double`。
+
+来看一段具体的代码：
+
+```cs
+public struct ValueTypeTest
+{
+    public int Number;
+    public ReferenceTypeTest TestRef;
+}
+
+public class ReferenceTypeTest
+{
+    public int Number;
+    public ValueTypeTest TestVal;
+    public ReferenceTypeTest TestRef;
+}
+
+public static class Program
+{
+    [STAThread]
+    public static int Main()
+    {
+        var testRef1 = new ReferenceTypeTest();
+        var testVal = new ValueTypeTest { TestRef = testRef1 };
+        var testRef2 = new ReferenceTypeTest() { TestRef = testRef1, TestVal = testVal };
+        return 0;
+    }
+}
+```
+
+在代码的 `Main` 方法中，我们声明了一个值类型和一个引用类型。
+
+值类型包含另一个值类型 `int` 的数据和一个引用类型的引用，而引用类型包含值类型 `int` 的数据和值类型 `ValueTypeTest` 的数据，同时也包含了其本身类型的一个引用。
+
+那这段代码的内存分配是什么样子的呢？
+
+```plain
+infographic hierarchy-structure
+data
+  desc 此处已省略方法本身在栈中占用的基本空间，VTT 与 RTT 为 ValueTypeTest 和 ReferenceTypeTest 的简写
+  items
+    - label 栈 (Stack)
+      children
+        - label Main 方法
+          children
+            - label RTT #1 引用
+            - label VTT #1 本体
+            - label RTT #2 引用
+        - label Main - VTT #1
+          children
+            - label int #1 本体
+            - label RTT #1 引用
+    - label 堆 (Heap)
+      children
+        - label RTT #1 本体
+          children
+            - label int #2 本体
+            - label VTT #2 本体
+            - label RTT 空引用
+        - label RTT #2 本体
+          children
+            - label int #3 本体
+            - label VTT #3 本体
+            - label RTT #1 引用
+        - label RTT #1 - VTT #2
+          children
+            - label int #4 本体
+            - label RTT 空引用
+        - label RTT #2 - VTT #3
+          children
+            - label int #5 本体
+            - label RTT #1 引用
+```
+
+可见，大多数数据都会被丢到堆里，栈里面只有各种引用和临时的值类型数据。由于平时我们写代码时使用**类**远多于使用**结构体**，因此堆内存占用通常应远大于栈内存。
+
 ## 为什么要这样设计？
+
+从以上流程中我们不难得出，栈只负责存储引用和小数据，而大多数实际数据都存在堆里面。
 
 *未完待续*
