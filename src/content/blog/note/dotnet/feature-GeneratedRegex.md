@@ -7,7 +7,7 @@ categories:
   - [笔记, .NET]
 tags:
   - .NET
-  - C#
+  - CSharp
   - 正则表达式
   - 源生成器
 ---

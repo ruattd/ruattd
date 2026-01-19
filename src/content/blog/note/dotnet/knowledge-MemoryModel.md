@@ -6,7 +6,7 @@ categories:
   - [笔记, .NET]
 tags:
   - .NET
-  - C#
+  - CSharp
   - CLR
   - 内存
 ---
