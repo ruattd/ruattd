@@ -1,7 +1,6 @@
 ---
 title: macOS 禁用烦人更新提示
 date: 2026-01-19 17:59:44
-link: life/trick/macos/disable-update-notification
 categories:
   - [随笔, 奇淫巧技]
 tags:

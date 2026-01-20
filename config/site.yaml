@@ -45,6 +45,7 @@ categoryMap:
   安利: recommend
   # Secondary categories (for nested paths)
   日常: daily
+  奇淫巧技: trick
   .NET: dotnet
   算法: algorithm
   前端: frontend
