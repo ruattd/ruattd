@@ -8,7 +8,6 @@ tags:
   - VSCode
 categories:
   - [随笔, 日常]
-draft: true
 ---
 
 ## 误用 Template 小故事
