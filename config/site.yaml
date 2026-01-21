@@ -246,6 +246,12 @@ friends:
       desc: 只恨年少，不知路遥。
       image: https://blog.sin.moe/img/avatar.webp
       color: '#f6b171'
+    - site: 柠记茶楼
+      url: https://blog.lemonice.top
+      owner: 冷柠
+      desc: 临安初雨，一夜落红。
+      image: https://blog.lemonice.top/img/avatar.webp
+      color: “#e0edff”
     # - site: 示例博客 A
     #   url: https://example-a.com
     #   owner: Alice
