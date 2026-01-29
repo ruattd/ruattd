@@ -188,16 +188,9 @@ social:
 friends:
   intro:
     title: 友人帐 # 页面标题
-    subtitle: 欢迎交换友链！ # 页面副标题
+    subtitle: 我的小伙伴们，欢迎加友链～ # 页面副标题
     applyTitle: 申请友链 # 申请区块标题
     applyDesc: 请在本页留言，格式如下 # 申请说明
-    exampleYaml: | # 申请格式示例，会显示在页面上
-      - site: 天天的糖果屋 # 站点名称
-        url: https://blog.rqwq.link # 站点网址
-        owner: ruattd # 昵称
-        desc: Walk softly through the world. # 站点简介
-        image: https://blog.rqwq.link/img/avatar.webp # 头像链接
-        color: "#ffc0cb" # 主题色（可选）
   data: # 友链列表
     - site: 余弦の博客
       url: https://blog.cosine.ren
@@ -259,6 +252,12 @@ friends:
       desc: 一只鸽子的备忘录
       image: https://blog.tangge233.top/avatars/tangge233.webp
       color: '#4bcbfc'
+    - site: Hill233的小窝
+      url: https://suki.ink
+      owner: Hill233
+      desc: 只是一个普普通通的 blog 罢了
+      image: https://suki.ink/upload/g.jpg
+      color: '#cc7a00'
     # - site: 示例博客 A
     #   url: https://example-a.com
     #   owner: Alice
