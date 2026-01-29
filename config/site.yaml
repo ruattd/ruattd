@@ -251,7 +251,13 @@ friends:
       owner: 冷柠
       desc: 临安初雨，一夜落红。
       image: https://blog.lemonice.top/img/avatar.webp
-      color: “#e0edff”
+      color: '#e0edff'
+    - site: tangge233 的备忘录
+      url: https://blog.tangge233.top/
+      owner: tangge233
+      desc: 一只鸽子的备忘录
+      image: https://blog.tangge233.top/avatars/tangge233.webp
+      color: '#4bcbfc'
     # - site: 示例博客 A
     #   url: https://example-a.com
     #   owner: Alice
