@@ -1,6 +1,7 @@
 // Import YAML config directly - processed by @rollup/plugin-yaml
 
-import type { CommentConfig, FeaturedSeriesItem } from '@lib/config/types';
+import type { CMSConfig, CommentConfig, FeaturedSeriesItem } from '@lib/config/types';
+import rawCmsConfig from '../../config/cms.yaml';
 import yamlConfig from '../../config/site.yaml';
 import { isReservedSlug, RESERVED_ROUTES } from './router';
 
@@ -15,6 +16,7 @@ type SiteConfig = {
   author?: string;
   site: string;
   startYear?: number;
+  defaultOgImage?: string;
   keywords?: string[];
   featuredCategories?: {
     link: string;
@@ -188,6 +190,7 @@ export const siteConfig: SiteConfig = {
   author: yamlConfig.site.author,
   site: yamlConfig.site.url,
   startYear: yamlConfig.site.startYear,
+  defaultOgImage: yamlConfig.site.defaultOgImage,
   keywords: yamlConfig.site.keywords,
   featuredCategories: yamlConfig.featuredCategories,
   featuredSeries: normalizeFeaturedSeries(yamlConfig.featuredSeries),
@@ -261,6 +264,14 @@ export const christmasConfig: ChristmasConfig = yamlConfig.christmas || {
     mobileMaxLayers: 4,
     mobileMaxIterations: 6,
   },
+};
+
+// Map YAML CMS config with defaults
+export const cmsConfig: CMSConfig = {
+  enabled: rawCmsConfig?.enabled ?? false,
+  localProjectPath: rawCmsConfig?.localProjectPath ?? '',
+  contentRelativePath: rawCmsConfig?.contentRelativePath ?? 'src/content/blog',
+  editors: rawCmsConfig?.editors ?? [],
 };
 
 // =============================================================================
