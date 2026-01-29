@@ -1,12 +1,11 @@
 ---
 title: .NET 内存模型简介
 date: 2026-01-19 00:25:01
-link: dotnet/knowledge/MemoryModel
 categories:
   - [笔记, .NET]
 tags:
   - .NET
-  - CSharp
+  - C#
   - CLR
   - 内存
 ---
