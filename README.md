@@ -14,6 +14,6 @@
 
 好了，就这样吧，没什么好说的了，上色图，欢迎来关注我哦。
 
-[![GitHub Insights](https://yourinsights.vercel.app/api/insight?username=ruattd&theme=tokyonight&graph=true&languages=true&streak=true&stats=true&header=true&summary=true&profile=false)](https://github.com/ruattd)
+[![GitHub Insights](https://yourinsights.rqwq.link/api/insight?username=ruattd&theme=ocean&graph=true&languages=true&streak=true&stats=true&header=true&summary=true&profile=false)](https://github.com/ruattd)
 
 哦对了，这个仓库同时也是我的博客，欢迎各位大佬互投友链～

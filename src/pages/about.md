@@ -29,4 +29,4 @@ description: "关于我和这个网站"
 
 好了，就这样吧，没什么好说的了，上色图，欢迎来关注我哦。
 
-[![GitHub Insights](https://yourinsights.vercel.app/api/insight?username=ruattd&theme=tokyonight&graph=true&languages=true&streak=true&stats=true&header=true&summary=true&profile=false)](https://github.com/ruattd)
+[![GitHub Insights](https://yourinsights.rqwq.link/api/insight?username=ruattd&theme=ocean&graph=true&languages=true&streak=true&stats=true&header=true&summary=true&profile=false)](https://github.com/ruattd)
