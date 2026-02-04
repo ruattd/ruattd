@@ -18,7 +18,7 @@ layout: ../layouts/FriendsLayout.astro
 site: 天天的糖果屋 # 站点名称
 url: https://blog.rqwq.link # 站点网址
 owner: ruattd # 昵称
-desc: Walk softly through the world. # 站点简介
+desc: Walk softly through the world. # 站点简介 (不要忘了句号哦)
 image: https://blog.rqwq.link/img/avatar.webp # 头像链接
-color: "#ffc0cb" # 主题色（可选）
+color: "#ffc0cb" # 主题色
 ```

@@ -258,6 +258,12 @@ friends:
       desc: 只是一个普普通通的 blog 罢了
       image: https://suki.ink/upload/g.jpg
       color: '#cc7a00'
+    - site: SakuraKooi's Blog
+      url: https://blog.sakurakooi.dev
+      owner: SakuraKooi
+      desc: 梦是幽蓝色彩 灵魂如雪纯白
+      image: https://blog.sakurakooi.dev/images/sakurakooi.webp
+      color: '#ffc0cb'
     # - site: 示例博客 A
     #   url: https://example-a.com
     #   owner: Alice
