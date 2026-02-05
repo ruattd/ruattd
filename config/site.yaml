@@ -264,6 +264,12 @@ friends:
       desc: 梦是幽蓝色彩 灵魂如雪纯白
       image: https://blog.sakurakooi.dev/images/sakurakooi.webp
       color: '#ff80ab'
+    - site: 天码行空的小破站
+      url: https://cs.gt.tc
+      owner: 咸鱼
+      desc: 路漫漫其修远兮，吾将上下而求索
+      image: https://bu.dusays.com/2026/02/05/6984096009670.jpeg
+      color: '#c2ffdf'
     # - site: 示例博客 A
     #   url: https://example-a.com
     #   owner: Alice
