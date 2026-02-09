@@ -272,6 +272,12 @@ friends:
       desc: 路漫漫其修远兮，吾将上下而求索
       image: https://bu.dusays.com/2026/02/05/6984096009670.jpeg
       color: '#c2ffdf'
+    - site: 流年如鸽
+      url: https://itspigeon.xin
+      owner: 鸽秋
+      desc: Live a life you will remember.
+      image: https://itspigeon.xin/img/avatar.webp
+      color: '#ffa565'
     # - site: 示例博客 A
     #   url: https://example-a.com
     #   owner: Alice
