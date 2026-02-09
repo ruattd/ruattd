@@ -1,10 +1,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { Select } from '@inkjs/ui';
 import { Box, render, Text, useApp } from 'ink';
 import { useState } from 'react';
 import { BackupApp } from './koharu/backup.js';
 import { CleanApp } from './koharu/clean.js';
+import { CycleSelect as Select } from './koharu/components';
 import { GenerateApp } from './koharu/generate.js';
 import { HelpApp } from './koharu/help.js';
 import { ListApp } from './koharu/list.js';
@@ -44,7 +44,8 @@ koharu - astro-koharu CLI
   --force                  跳过确认提示
   --tag <version>          指定目标版本（如 v2.0.0）
   --rebase                 使用 rebase 模式（重写历史，强制备份）
-  --dry-run                预览 rebase 操作（不实际执行）
+  --clean                  使用 clean 模式（零冲突，强制备份）
+  --dry-run                预览操作（不实际执行）
 
 清理选项:
   --keep N                 保留最近 N 个备份，删除其余
@@ -174,6 +175,7 @@ function KoharuApp() {
           targetTag={args.tag || undefined}
           rebase={args.rebase}
           dryRun={args.dryRun}
+          clean={args.clean}
           showReturnHint={fromMenu}
           onComplete={handleComplete}
         />

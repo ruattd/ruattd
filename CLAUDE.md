@@ -68,7 +68,7 @@ pnpm knip             # Find unused files/dependencies
 pnpm koharu              # Interactive menu
 pnpm koharu backup       # Backup blog content and config (--full for complete backup)
 pnpm koharu restore      # Restore from backup (--latest, --dry-run, --force)
-pnpm koharu update       # Update theme from upstream (--check, --skip-backup, --force, --rebase)
+pnpm koharu update       # Update theme from upstream (--check, --skip-backup, --force, --rebase, --clean)
 pnpm koharu generate     # Generate content assets (interactive menu)
 pnpm koharu generate lqips        # Generate LQIP image placeholders
 pnpm koharu generate similarities # Generate semantic similarity vectors
@@ -211,6 +211,7 @@ Biome (line width: 128, single quotes, trailing commas). Tailwind classes must b
 - Use `useMemo()` for expensive computations only
 - Use `useCallback()` only when passing to memoized children
 - Use `useSyncExternalStore` for scroll events (see `useCurrentHeading`)
+- **Avoid large props**: Never pass large data (like `body` content) as props. Pre-compute derived values (e.g., `wordCount`, `readingTime`) instead. Large props get serialized into HTML when passed to client components, causing page bloat.
 
 ### Code Reuse Patterns
 1. **Pure Functions** (`src/lib/`): Extract when used 2+ times

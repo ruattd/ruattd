@@ -2,6 +2,7 @@ import path from 'node:path';
 import { ConfirmInput, Spinner } from '@inkjs/ui';
 import { Box, Text } from 'ink';
 import { useCallback, useEffect, useReducer, useState } from 'react';
+import { CycleSelect as Select } from './components';
 import { AUTO_EXIT_DELAY } from './constants';
 import type { ReleaseInfo, UpdateOptions } from './constants/update';
 import { usePressAnyKey, useRetimer } from './hooks';
@@ -10,6 +11,23 @@ import { statusEffects } from './utils/update-effects';
 import { abortMerge, abortRebase, buildReleaseUrl, extractReleaseSummary, fetchReleaseInfo } from './utils/update-operations';
 import { createInitialState, updateReducer } from './utils/update-reducer';
 
+/** 根据更新模式获取操作标签 */
+function getModeLabel(opts: { rebase: boolean; clean: boolean; isDowngrade?: boolean }): string {
+  if (opts.rebase) return 'Rebase';
+  if (opts.clean) return 'Clean 模式更新';
+  if (opts.isDowngrade) return '版本回退';
+  return '更新';
+}
+
+/** 生成确认提示文字 */
+function getConfirmMessage(opts: UpdateOptions, latestVersion: string, isDowngrade: boolean): string {
+  const target = opts.targetTag ? `版本 v${latestVersion}` : '最新版本';
+  if (opts.rebase) return `确认执行 rebase 到${opts.targetTag ? target : '上游最新'}？（历史将被重写）`;
+  if (opts.clean) return `确认执行 clean 模式更新到${target}？`;
+  if (isDowngrade) return `确认回退到版本 v${latestVersion}？`;
+  return `确认更新到${target}？`;
+}
+
 interface UpdateAppProps {
   checkOnly?: boolean;
   skipBackup?: boolean;
@@ -17,6 +35,7 @@ interface UpdateAppProps {
   targetTag?: string;
   rebase?: boolean;
   dryRun?: boolean;
+  clean?: boolean;
   showReturnHint?: boolean;
   onComplete?: () => void;
 }
@@ -28,17 +47,29 @@ export function UpdateApp({
   targetTag,
   rebase = false,
   dryRun = false,
+  clean = false,
   showReturnHint = false,
   onComplete,
 }: UpdateAppProps) {
-  const options: UpdateOptions = { checkOnly, skipBackup, force, targetTag, rebase, dryRun };
+  const options: UpdateOptions = { checkOnly, skipBackup, force, targetTag, rebase, dryRun, clean };
   const [state, dispatch] = useReducer(updateReducer, options, createInitialState);
 
   // Release 信息异步加载
   const [releaseInfo, setReleaseInfo] = useState<ReleaseInfo | null>(null);
   const [releaseLoading, setReleaseLoading] = useState(false);
 
-  const { status, gitStatus, updateInfo, mergeResult, backupFile, error, branchWarning, options: stateOptions } = state;
+  const {
+    status,
+    gitStatus,
+    updateInfo,
+    mergeResult,
+    backupFile,
+    error,
+    branchWarning,
+    needsMigration,
+    restoredFiles,
+    options: stateOptions,
+  } = state;
   const retimer = useRetimer();
 
   // 统一完成处理
@@ -107,6 +138,14 @@ export function UpdateApp({
   const handleBackupSkip = useCallback(() => dispatch({ type: 'BACKUP_SKIP' }), []);
   const handleUpdateConfirm = useCallback(() => dispatch({ type: 'UPDATE_CONFIRM' }), []);
   const handleUpdateCancel = useCallback(() => onComplete?.(), [onComplete]);
+  const handleBackupSelect = useCallback(
+    (value: string) => {
+      if (value === 'backup') handleBackupConfirm();
+      else if (value === 'skip') handleBackupSkip();
+      else handleUpdateCancel();
+    },
+    [handleBackupConfirm, handleBackupSkip, handleUpdateCancel],
+  );
 
   const handleAbortMerge = useCallback(() => {
     const success = abortMerge();
@@ -188,30 +227,43 @@ export function UpdateApp({
       {/* Backup confirmation */}
       {status === 'backup-confirm' && (
         <Box flexDirection="column">
-          {stateOptions.rebase && (
-            <Box marginBottom={1} flexDirection="column">
-              <Text color="yellow" bold>
-                ⚠ Rebase 模式强制要求备份
-              </Text>
-              {stateOptions.skipBackup && (
-                <Text color="yellow" dimColor>
-                  {'  '}（--skip-backup 已被忽略）
+          {stateOptions.rebase || stateOptions.clean ? (
+            // Rebase/Clean 模式：强制备份，只能确认或取消整个流程
+            <>
+              <Box marginBottom={1} flexDirection="column">
+                <Text color="yellow" bold>
+                  ⚠ {stateOptions.rebase ? 'Rebase' : 'Clean'} 模式强制要求备份
                 </Text>
-              )}
-            </Box>
-          )}
-          <Text>{stateOptions.rebase ? '即将执行备份（Rebase 模式必须备份）' : '更新前是否备份当前内容？'}</Text>
-          <Box marginTop={1}>
-            {stateOptions.rebase ? (
-              <ConfirmInput onConfirm={handleBackupConfirm} onCancel={handleUpdateCancel} />
-            ) : (
-              <ConfirmInput onConfirm={handleBackupConfirm} onCancel={handleBackupSkip} />
-            )}
-          </Box>
-          {!stateOptions.rebase && (
-            <Box marginTop={1}>
-              <Text dimColor>提示: 使用 --skip-backup 跳过此提示</Text>
-            </Box>
+                {stateOptions.skipBackup && (
+                  <Text color="yellow" dimColor>
+                    {'  '}（--skip-backup 已被忽略）
+                  </Text>
+                )}
+              </Box>
+              <Text>确认执行备份？</Text>
+              <Box marginTop={1}>
+                <ConfirmInput onConfirm={handleBackupConfirm} onCancel={handleUpdateCancel} />
+              </Box>
+            </>
+          ) : (
+            // 普通模式：三选项 - 备份/跳过/取消
+            <>
+              <Text>更新前是否备份当前内容？</Text>
+              <Text dimColor>备份将保存博客文章、配置等重要文件，更新失败时可恢复</Text>
+              <Box marginTop={1}>
+                <Select
+                  options={[
+                    { label: '是 - 执行备份后更新', value: 'backup' },
+                    { label: '否 - 跳过备份直接更新', value: 'skip' },
+                    { label: '取消 - 退出更新流程', value: 'cancel' },
+                  ]}
+                  onChange={handleBackupSelect}
+                />
+              </Box>
+              <Box marginTop={1}>
+                <Text dimColor>提示: 使用 --skip-backup 跳过此提示</Text>
+              </Box>
+            </>
           )}
         </Box>
       )}
@@ -353,6 +405,13 @@ export function UpdateApp({
             </Box>
           )}
 
+          {/* 首次迁移提示 */}
+          {needsMigration && !stateOptions.rebase && !stateOptions.clean && (
+            <Box marginTop={1}>
+              <Text color="yellow">⚠ 检测到首次从 squash merge 迁移，建议使用 --clean 模式获得零冲突体验</Text>
+            </Box>
+          )}
+
           {stateOptions.checkOnly || stateOptions.dryRun ? (
             <Box marginTop={1} flexDirection="column">
               <Text dimColor>
@@ -388,6 +447,14 @@ export function UpdateApp({
                   )}
                 </Box>
               )}
+              {stateOptions.dryRun && stateOptions.clean && (
+                <Box marginTop={1} flexDirection="column">
+                  <Text>如果执行 clean 模式，将会:</Text>
+                  <Text dimColor>{'  '}• 替换所有主题文件为上游最新版本</Text>
+                  <Text dimColor>{'  '}• 从备份还原用户内容（博客文章、配置等）</Text>
+                  <Text dimColor>{'  '}• 零冲突，适合首次迁移</Text>
+                </Box>
+              )}
               {updateInfo.isDowngrade && !stateOptions.dryRun && (
                 <Box marginTop={1}>
                   <Text color="yellow">提示: 执行降级前请务必先备份您的博客内容</Text>
@@ -411,15 +478,10 @@ export function UpdateApp({
                   </Box>
                 )}
                 <Box flexDirection="column">
-                  <Text>
-                    {stateOptions.rebase
-                      ? `确认执行 rebase 到${stateOptions.targetTag ? `版本 v${updateInfo.latestVersion}` : '上游最新'}？（历史将被重写）`
-                      : updateInfo.isDowngrade
-                        ? `确认回退到版本 v${updateInfo.latestVersion}？`
-                        : `确认更新到${stateOptions.targetTag ? `版本 v${updateInfo.latestVersion}` : '最新版本'}？`}
-                  </Text>
-                  {!stateOptions.rebase && !updateInfo.isDowngrade && (
-                    <Text dimColor>{'  '}将使用 squash merge 保持提交历史线性</Text>
+                  <Text>{getConfirmMessage(stateOptions, updateInfo.latestVersion, updateInfo.isDowngrade)}</Text>
+                  {stateOptions.clean && <Text dimColor>{'  '}将使用 clean 模式：替换所有主题文件，还原用户内容</Text>}
+                  {!stateOptions.rebase && !stateOptions.clean && !updateInfo.isDowngrade && (
+                    <Text dimColor>{'  '}将使用 merge 合并上游更新</Text>
                   )}
                 </Box>
                 <ConfirmInput onConfirm={handleUpdateConfirm} onCancel={handleUpdateCancel} />
@@ -432,15 +494,14 @@ export function UpdateApp({
       {/* Merging */}
       {status === 'merging' && (
         <Box>
-          <Spinner
-            label={
-              stateOptions.rebase
-                ? '正在执行 rebase...'
-                : updateInfo?.isDowngrade
-                  ? '正在回退版本...'
-                  : '正在合并更新（squash merge）...'
-            }
-          />
+          <Spinner label={`正在执行${getModeLabel({ ...stateOptions, isDowngrade: updateInfo?.isDowngrade })}...`} />
+        </Box>
+      )}
+
+      {/* Clean restoring */}
+      {status === 'clean-restoring' && (
+        <Box>
+          <Spinner label="正在还原用户内容..." />
         </Box>
       )}
 
@@ -455,14 +516,39 @@ export function UpdateApp({
       {status === 'done' && (
         <Box flexDirection="column">
           <Text bold color="green">
-            {stateOptions.rebase ? 'Rebase 完成' : updateInfo?.isDowngrade ? '版本回退完成' : '更新完成'}
+            {getModeLabel({ ...stateOptions, isDowngrade: updateInfo?.isDowngrade })}完成
           </Text>
           {updateInfo?.isDowngrade && !stateOptions.rebase && (
             <Text>
               已回退到版本: <Text color="cyan">v{updateInfo.latestVersion}</Text>
             </Text>
           )}
-          {!updateInfo?.isDowngrade && !stateOptions.rebase && <Text dimColor>使用 squash merge 保持提交历史线性</Text>}
+          {stateOptions.clean && (
+            <Box flexDirection="column">
+              <Text dimColor>已替换所有主题文件并还原用户内容</Text>
+              {restoredFiles.length > 0 && (
+                <Box marginTop={1} flexDirection="column">
+                  <Text color="cyan">已还原的用户内容:</Text>
+                  {restoredFiles.map((file) => (
+                    <Text key={file} dimColor>
+                      {'  '}- {file}
+                    </Text>
+                  ))}
+                </Box>
+              )}
+            </Box>
+          )}
+          {/* 自动解决的冲突文件信息 */}
+          {mergeResult?.autoResolvedFiles && mergeResult.autoResolvedFiles.length > 0 && (
+            <Box marginTop={1} flexDirection="column">
+              <Text color="cyan">以下用户内容文件的冲突已自动保留为本地版本:</Text>
+              {mergeResult.autoResolvedFiles.map((file) => (
+                <Text key={file} dimColor>
+                  {'  '}- {file}
+                </Text>
+              ))}
+            </Box>
+          )}
           {backupFile && (
             <Text>
               备份文件: <Text color="cyan">{backupFile}</Text>
@@ -546,8 +632,18 @@ export function UpdateApp({
           <Text bold color="yellow">
             {mergeResult.isRebaseConflict ? '发现 Rebase 冲突' : '发现合并冲突'}
           </Text>
+          {mergeResult.autoResolvedFiles && mergeResult.autoResolvedFiles.length > 0 && (
+            <Box marginTop={1} flexDirection="column">
+              <Text color="cyan">已自动保留以下用户内容文件（使用本地版本）:</Text>
+              {mergeResult.autoResolvedFiles.map((file) => (
+                <Text key={file} dimColor>
+                  {'  '}- {file}
+                </Text>
+              ))}
+            </Box>
+          )}
           <Box marginTop={1} flexDirection="column">
-            <Text>冲突文件:</Text>
+            <Text>需要手动解决的冲突文件:</Text>
             {mergeResult.conflictFiles.map((file) => (
               <Text key={file} color="red">
                 {'  '}- {file}

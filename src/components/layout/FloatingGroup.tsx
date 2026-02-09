@@ -7,15 +7,16 @@
  * - Expand/collapse toggle
  */
 
-import { christmasConfig } from '@constants/site-config';
+import { bgmConfig, christmasConfig } from '@constants/site-config';
 import { useIsMounted } from '@hooks/useIsMounted';
 import { Icon } from '@iconify/react';
 import { cn } from '@lib/utils';
 import { useStore } from '@nanostores/react';
+import { $bgmPanelOpen, toggleBgmPanel } from '@store/bgm';
 import { christmasEnabled, disableChristmasCompletely, enableChristmas, initChristmasState } from '@store/christmas';
 import { $isDrawerOpen } from '@store/modal';
 import { AnimatePresence, motion } from 'motion/react';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface FloatingButtonProps {
   onClick: () => void;
@@ -48,31 +49,26 @@ export default function FloatingGroup() {
   const [isExpanded, setIsExpanded] = useState(true);
   const isDrawerOpen = useStore($isDrawerOpen);
   const isChristmasEnabled = useStore(christmasEnabled);
+  const isBgmPanelOpen = useStore($bgmPanelOpen);
 
   // Initialize christmas state on mount
   useEffect(() => {
     initChristmasState();
   }, []);
 
-  const scrollToTop = useCallback(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, []);
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
-  const scrollToBottom = useCallback(() => {
-    window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
-  }, []);
+  const scrollToBottom = () => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
 
-  const toggleChristmas = useCallback(() => {
+  const toggleChristmas = () => {
     if (christmasEnabled.get()) {
       disableChristmasCompletely();
     } else {
       enableChristmas();
     }
-  }, []);
+  };
 
-  const toggleExpand = useCallback(() => {
-    setIsExpanded((prev) => !prev);
-  }, []);
+  const toggleExpand = () => setIsExpanded((prev) => !prev);
 
   // Hide when drawer is open
   const isHidden = isDrawerOpen;
@@ -99,6 +95,11 @@ export default function FloatingGroup() {
             {christmasConfig.enabled && (
               <FloatingButton onClick={toggleChristmas} ariaLabel="切换圣诞特效" title="切换圣诞特效">
                 <Icon icon={isChristmasEnabled ? 'ri:snowy-fill' : 'ri:snowy-line'} className="h-5 w-5" />
+              </FloatingButton>
+            )}
+            {bgmConfig.enabled && bgmConfig.audio.length > 0 && (
+              <FloatingButton onClick={toggleBgmPanel} ariaLabel="背景音乐" title="背景音乐">
+                <Icon icon={isBgmPanelOpen ? 'ri:music-2-fill' : 'ri:music-2-line'} className="h-5 w-5" />
               </FloatingButton>
             )}
             <FloatingButton onClick={scrollToTop} ariaLabel="回到顶部" title="回到顶部">

@@ -1,17 +1,17 @@
 import Popover from '@components/ui/popover';
 import type { Router } from '@constants/router';
-import { useToggle } from '@hooks/useToggle';
 import { Icon } from '@iconify/react';
 import { cn } from '@lib/utils';
-import { memo, useCallback } from 'react';
+import { memo, useCallback, useState } from 'react';
 
 interface DropdownNavProps {
   item: Router;
+  currentPath: string;
   className?: string;
 }
 
-const DropdownNavComponent = ({ item, className }: DropdownNavProps) => {
-  const { isOpen, setIsOpen } = useToggle({ defaultOpen: false });
+const DropdownNavComponent = ({ item, currentPath, className }: DropdownNavProps) => {
+  const [isOpen, setIsOpen] = useState(false);
   const { name, icon, children } = item;
 
   const renderDropdownContent = useCallback(
@@ -27,7 +27,7 @@ const DropdownNavComponent = ({ item, className }: DropdownNavProps) => {
                   {
                     'rounded-ss-2xl': index === 0,
                     'rounded-ee-2xl': index === children.length - 1,
-                    'bg-gradient-shoka-button text-muted': window.location.pathname === child.path,
+                    'bg-gradient-shoka-button text-muted': currentPath === child.path,
                   },
                 )}
               >
@@ -40,7 +40,7 @@ const DropdownNavComponent = ({ item, className }: DropdownNavProps) => {
           : null}
       </div>
     ),
-    [children],
+    [children, currentPath],
   );
 
   return (

@@ -5,8 +5,9 @@ import { CONTENT_PADDING } from '@constants/layout';
 import { siteConfig } from '@constants/site-config';
 import Layout from '@layouts/Layout.astro';
 import TwoColumnLayout from '@layouts/TwoColumnLayout.astro';
-import { getPostLastCategory, getSortedPosts, normalizeTag, tagToSlug } from '@lib/content';
-import { formatInTimeZone } from 'date-fns-tz';
+import { getPostLastCategory, getSortedPosts, normalizeTag } from '@lib/content';
+import { displayDate } from '@lib/date';
+import { encodeSlug } from '@lib/route';
 
 export async function getStaticPaths() {
   const posts = await getSortedPosts();
@@ -20,7 +21,7 @@ export async function getStaticPaths() {
   });
 
   return Array.from(tags).map((tag) => ({
-    params: { tag: tagToSlug(tag) },
+    params: { tag: normalizeTag(tag).replace(/\//g, '-') },
     props: {
       posts: posts.filter((post) => post.data.tags?.some((t) => normalizeTag(t) === tag)),
       tag,
@@ -53,7 +54,7 @@ const { tag, posts } = Astro.props;
               return (
                 <p class="shoka-decoration-circle group text-primary relative px-6 py-2 text-base/9 md:overflow-visible">
                   <span class="text-muted-foreground inline-block w-15 text-xs md:relative md:-top-1">
-                    {formatInTimeZone(post.data.date, 'UTC', 'yy-MM-dd')}
+                    {displayDate.shortDate(post.data.date)}
                   </span>
                   <a
                     href={Astro.url.origin + link}
@@ -61,7 +62,7 @@ const { tag, posts } = Astro.props;
                   >
                     {name}
                   </a>
-                  <a href={`/post/${encodeURIComponent(post?.data?.link ?? post.slug)}`} class="dashed-border md:absolute md:top-7 md:left-7">
+                  <a href={`/post/${encodeSlug(post?.data?.link ?? post.slug)}`} class="dashed-border md:absolute md:top-7 md:left-7">
                     {post?.data?.title}
                   </a>
                 </p>

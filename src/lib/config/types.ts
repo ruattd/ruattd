@@ -21,6 +21,10 @@ export interface SiteBasicConfig {
   startYear?: number;
   defaultOgImage?: string;
   keywords?: string[];
+  /** 面包屑导航中首页的显示名称 @default '首页' */
+  breadcrumbHome?: string;
+  /** 时区配置 (IANA 格式) @default 'Asia/Shanghai' */
+  timezone?: string;
 }
 
 // =============================================================================
@@ -149,6 +153,17 @@ export interface ContentConfig {
   enableOGPreview: boolean;
   previewCacheTime: number;
   lazyLoadEmbeds: boolean;
+  // Shoka compatibility features
+  enableShokaContainers?: boolean;
+  enableShokaAttrs?: boolean;
+  enableShokaEffects?: boolean;
+  enableShokaSpoiler?: boolean;
+  enableShokaRuby?: boolean;
+  enableShokaHexoTags?: boolean;
+  enableMath?: boolean;
+  enableCodeMeta?: boolean;
+  enableQuiz?: boolean;
+  enableEncryptedBlock?: boolean;
 }
 
 // =============================================================================
@@ -396,6 +411,26 @@ export interface AnalyticsConfig {
 }
 
 // =============================================================================
+// SEO Configuration
+// =============================================================================
+
+export interface RobotsPolicyItem {
+  userAgent: string;
+  allow?: string | string[];
+  disallow?: string | string[];
+  crawlDelay?: number;
+}
+
+export interface RobotsConfig {
+  policy?: RobotsPolicyItem[];
+  host?: boolean;
+}
+
+export interface SeoConfig {
+  robots?: RobotsConfig;
+}
+
+// =============================================================================
 // Christmas/Seasonal Features
 // =============================================================================
 
@@ -424,14 +459,48 @@ export interface ChristmasConfig {
 }
 
 // =============================================================================
-// CMS Configuration (Backend-less Local Editor Integration)
+// Dev Tools Configuration (Dev Only - Local Editor Integration)
 // =============================================================================
 
-// Import CMS types from @/types/cms
-import type { CMSConfig } from '@/types/cms';
+/**
+ * Configuration for a single editor
+ */
+export interface EditorConfig {
+  /** Unique identifier for the editor */
+  id: string;
+  /** Display name */
+  name: string;
+  /** Iconify icon identifier (e.g., 'devicon-plain:vscode') */
+  icon: string;
+  /** URL template with placeholder: {path} for file absolute path */
+  urlTemplate: string;
+}
 
-// Re-export CMS types for backward compatibility
-export type { CMSConfig, EditorConfig } from '@/types/cms';
+/**
+ * Development tools configuration from site.yaml
+ */
+export interface DevConfig {
+  /** Absolute path to the local project directory */
+  localProjectPath: string;
+  /** Relative path from project root to content directory (default: 'src/content/blog') */
+  contentRelativePath: string;
+  /** List of configured editors */
+  editors: EditorConfig[];
+}
+
+// =============================================================================
+// BGM (Background Music) Configuration
+// =============================================================================
+
+export interface BgmAudioGroup {
+  title?: string;
+  list: string[];
+}
+
+export interface BgmConfig {
+  enabled?: boolean;
+  audio?: BgmAudioGroup[];
+}
 
 // =============================================================================
 // Root Configuration Type
@@ -449,8 +518,12 @@ export interface SiteYamlConfig {
   navigation?: RouterItem[];
   comment?: CommentConfig;
   analytics?: AnalyticsConfig;
+  /** SEO configuration for robots.txt and meta tags */
+  seo?: SeoConfig;
   categoryMap?: Record<string, string>; // TODO: i18n, now use eg: { '随笔': 'life' }
+  /** Background music player configuration */
+  bgm?: BgmConfig;
   christmas?: ChristmasConfig;
-  /** CMS configuration for local editor integration */
-  cms?: CMSConfig;
+  /** Development tools configuration (dev only) */
+  dev?: DevConfig;
 }

@@ -1,7 +1,8 @@
 import path from 'node:path';
-import { Select, Spinner } from '@inkjs/ui';
+import { Spinner } from '@inkjs/ui';
 import { Box, Text } from 'ink';
 import { useCallback, useEffect, useState } from 'react';
+import { CycleSelect as Select } from './components';
 import { AUTO_EXIT_DELAY, type BackupResult, formatSize, runBackup, usePressAnyKey, useRetimer } from './shared';
 
 type BackupStatus = 'selecting' | 'pending' | 'backing' | 'compressing' | 'done' | 'error';
@@ -79,7 +80,7 @@ export function BackupApp({ initialFull = false, showReturnHint = false, onCompl
           <Text>选择备份模式:</Text>
           <Select
             options={[
-              { label: '基础备份（博客、配置、头像、.env）', value: 'basic' },
+              { label: '基础备份（博客、配置、独立页面、.env）', value: 'basic' },
               { label: '完整备份（包含所有图片和生成的资产）', value: 'full' },
               { label: '取消', value: 'cancel' },
             ]}
