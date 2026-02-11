@@ -5,7 +5,7 @@
  * Supports NetEase Cloud Music and QQ Music.
  */
 
-const DEFAULT_API = 'https://api.injahow.cn/meting/';
+const DEFAULT_API = 'https://api.baka.plus/meting/';
 const CACHE_TTL = 24 * 60 * 60 * 1000; // 24 hours
 
 export interface MetingSong {
