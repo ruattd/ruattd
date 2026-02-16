@@ -278,6 +278,12 @@ friends:
       desc: Live a life you will remember.
       image: https://itspigeon.xin/img/avatar.webp
       color: '#ffa565'
+    - site: Saku Shiina
+      url: https://www.shiina.xyz
+      owner: Saku
+      desc: blog and about me
+      image: https://shiina.xyz/avatar.png
+      color: '#F4E0A7'
     # - site: 示例博客 A
     #   url: https://example-a.com
     #   owner: Alice
