@@ -24,6 +24,8 @@ export interface BlogSchema {
   math?: boolean;
   /** Enable quiz interaction for this post */
   quiz?: boolean;
+  /** Password for encrypting the entire post content */
+  password?: string;
 }
 
 /**
@@ -71,4 +73,5 @@ export interface PostCardData {
   draft?: boolean;
   wordCount: number; // 预计算的字数
   readingTime: string; // 预计算的阅读时间
+  postLocale?: string; // 文章的原始语言代码（用于 fallback 标记）
 }

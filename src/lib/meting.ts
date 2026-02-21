@@ -25,12 +25,11 @@ interface ParsedUrl {
 // URL parsing rules (ported from Shoka player.js:30-47)
 const URL_RULES: [RegExp, string, string][] = [
   [/music\.163\.com.*song.*id=(\d+)/, 'netease', 'song'],
-  [/music\.163\.com.*album.*id=(\d+)/, 'netease', 'album'],
-  [/music\.163\.com.*artist.*id=(\d+)/, 'netease', 'artist'],
+  [/music\.163\.com.*album.*id=(\d+)/, 'netease', 'albumlist'],
   [/music\.163\.com.*playlist.*id=(\d+)/, 'netease', 'playlist'],
   [/music\.163\.com.*discover\/toplist.*id=(\d+)/, 'netease', 'playlist'],
   [/y\.qq\.com.*song\/(\w+)/, 'tencent', 'song'],
-  [/y\.qq\.com.*album\/(\w+)/, 'tencent', 'album'],
+  [/y\.qq\.com.*album\/(\w+)/, 'tencent', 'albumlist'],
   [/y\.qq\.com.*playsquare\/(\w+)/, 'tencent', 'playlist'],
   [/y\.qq\.com.*playlist\/(\w+)/, 'tencent', 'playlist'],
 ];

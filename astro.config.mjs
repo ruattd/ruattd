@@ -20,6 +20,7 @@ import { loadEnv } from 'vite';
 import svgr from 'vite-plugin-svgr';
 import YAML from 'yaml';
 import { rehypeEncryptedBlock } from './src/lib/markdown/rehype-encrypted-block.ts';
+import { rehypeEncryptedPost } from './src/lib/markdown/rehype-encrypted-post.ts';
 import { rehypeImagePlaceholder } from './src/lib/markdown/rehype-image-placeholder.ts';
 import { rehypeShokaAttrs } from './src/lib/markdown/rehype-shoka-attrs.ts';
 import { remarkEncryptedDirective } from './src/lib/markdown/remark-encrypted-directive.ts';
@@ -54,6 +55,12 @@ const umamiEndpoint = normalizeUrl(umamiConfig?.endpoint);
 
 // Get robots.txt config from YAML
 const robotsConfig = yamlConfig.seo?.robots;
+
+// i18n configuration from YAML
+const i18nYaml = yamlConfig.i18n;
+const i18nDefaultLocale = i18nYaml?.defaultLocale ?? 'zh';
+const i18nLocales = (i18nYaml?.locales ?? [{ code: 'zh' }]).map((l) => l.code);
+const hasMultipleLocales = i18nLocales.length > 1;
 
 /**
  * Vite plugin for conditional Three.js bundling
@@ -149,8 +156,11 @@ const rehypePlugins = [
 if (contentConfig.enableShokaAttrs !== false) rehypePlugins.push(rehypeShokaAttrs);
 rehypePlugins.push(rehypeImagePlaceholder);
 if (contentConfig.enableMath !== false) rehypePlugins.push(rehypeKatex);
-// Encrypted block MUST be last rehype plugin — encrypts fully-rendered children
-if (contentConfig.enableEncryptedBlock) rehypePlugins.push(rehypeEncryptedBlock);
+// Encrypted block/post MUST be last rehype plugins — encrypt fully-rendered children
+if (contentConfig.enableEncryptedBlock) {
+  rehypePlugins.push(rehypeEncryptedBlock);
+  rehypePlugins.push(rehypeEncryptedPost);
+}
 
 // Shiki transformers
 const shikiTransformers = [];
@@ -221,5 +231,17 @@ export default defineConfig({
       include: ['@antv/infographic'],
     },
   },
+  // Only enable Astro i18n routing when multiple locales are configured.
+  // Single-locale sites skip this entirely — no /[lang]/ routes are generated.
+  ...(hasMultipleLocales && {
+    i18n: {
+      defaultLocale: i18nDefaultLocale,
+      locales: i18nLocales,
+      routing: {
+        prefixDefaultLocale: false,
+        redirectToDefaultLocale: true,
+      },
+    },
+  }),
   trailingSlash: 'ignore',
 });
