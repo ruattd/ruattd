@@ -1,4 +1,5 @@
 ---
+import CustomContent from '@components/common/CustomContent.astro';
 import FriendRequestForm from '@components/friends/FriendRequestForm';
 import FriendsGrid from '@components/friends/FriendsGrid';
 import HomeSider from '@components/layout/HomeSider.astro';
@@ -24,6 +25,11 @@ const description = t(locale, 'friends.title');
     >
       <div class="mt-4">
         <FriendsGrid client:load />
+      </div>
+      <div class="prose md:prose-sm dark:prose-invert">
+        <CustomContent>
+          <slot />
+        </CustomContent>
       </div>
       <div class="mb-4">
         <FriendRequestForm client:visible />

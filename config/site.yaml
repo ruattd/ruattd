@@ -297,7 +297,7 @@ friends:
       url: https://www.shiina.xyz
       owner: Saku
       desc: blog and about me
-      image: https://shiina.xyz/avatar.png
+      image: https://www.shiina.xyz/avatar.png
       color: '#F4E0A7'
     # - site: 示例博客 A
     #   url: https://example-a.com
@@ -430,7 +430,7 @@ navigation:
     path: / # 链接路径
     icon: ri:home-heart-fill # 图标
   - name: 随笔
-    nameKey: nav.weekly
+    nameKey: nav.life
     path: /life
     icon: ri:newspaper-line
   - name: 文章 # 有子菜单时，path 可省略
