@@ -16,7 +16,7 @@ description: "关于我和这个网站"
 
 ## 任天天
 
-🍰 / 个人势摆烂大王 / 小洛包[梦灵](https://github.com/copytiao) / Bug 制造机 / PCL CE 开发 / 下落式狂魔 / 米游玩家
+🍰 / 个人势摆烂大王 / 小洛包[轻语](https://github.com/LinQingYuu) / Bug 制造机 / PCL CE 开发 / 下落式狂魔 / 米游玩家
 
 本体是蛋糕所以你会在很多地方看到 🍰 这个 emoji，看到它多少跟我有点关系，当然也不一定。
 
