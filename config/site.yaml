@@ -35,6 +35,9 @@ site:
     - 开发
     # 请根据你的网站内容添加关键词
   # breadcrumbHome: 首页  # 面包屑导航中首页的显示名称（默认: '首页'）
+  # icp:                         # ICP 备案号（可自定义链接）
+  #   text: "粤ICP备xxxxxxxxxx号"
+  #   link: "https://beian.miit.gov.cn/"
 
 # =============================================================================
 # Internationalization (i18n)
@@ -367,6 +370,17 @@ announcements:
   #   color: '#6366F1'
   #   publishDate: '2025-12-25'
 
+
+# =============================================================================
+# Default Cover List
+# 默认封面列表 - 文章没有指定封面时将随机从列表中选择一张作为封面
+# 不设置则使用内置的 21 张默认封面 (/img/cover/1~21.webp)
+# =============================================================================
+# defaultCoverList:
+#   - /img/cover/1.webp
+#   - https://example.com/custom-cover.webp
+
+
 # =============================================================================
 # Content Processing Options
 # 内容处理选项 - 控制文章渲染和交互行为
@@ -669,6 +683,20 @@ christmas:
   #   mobileMaxIterations: 6 # 移动端最大迭代次数
 
 # =============================================================================
+# Bangumi (Media Tracking)
+# 追番页面 - 注释掉整个 bangumi 段即可关闭（页面 + 导航自动隐藏）
+# =============================================================================
+# 字段说明：
+#   userId: Bangumi 用户名或数字 ID（必填）
+#   label: 导航显示名称（可选，默认：追番）
+#   icon: 导航图标，Iconify 格式（可选，默认：ri:bilibili-fill）
+# -----------------------------------------------------------------------------
+bangumi:
+  userId: cosine
+  # label: 追番
+  # icon: ri:bilibili-fill
+
+# =============================================================================
 # Development Tools (Dev Only)
 # 开发工具配置 - 仅在开发环境（pnpm dev）生效
 # =============================================================================
@@ -689,12 +717,12 @@ dev:
     - id: vscode
       name: VS Code
       icon: devicon-plain:vscode
-      urlTemplate: 'vscode://file{path}'
+      urlTemplate: 'vscode://file/{path}'
     - id: cursor
       name: Cursor
       icon: simple-icons:cursor
-      urlTemplate: 'cursor://file{path}'
+      urlTemplate: 'cursor://file/{path}'
     - id: zed
       name: Zed
       icon: simple-icons:zedindustries
-      urlTemplate: 'zed://file{path}'
+      urlTemplate: 'zed://file/{path}'
