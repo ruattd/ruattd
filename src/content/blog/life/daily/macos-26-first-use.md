@@ -110,6 +110,16 @@ categories:
 
 ![Apple Intelligence 通知总结](https://s3-blaze.rqwq.link/vscode/b5109de3310fa9f3a88648ccde565f81.png)
 
+### iPhone 互联
+
+别的不说了，多了一个很抢眼的功能，直接上图：
+
+![iPhone Mirroring Live Activity](https://s3-blaze.rqwq.link/vscode/064bcc847d3a86e9a9916df5ffe5e551.png)
+
+现在手机上的 Live Activity 通知会直接显示在顶栏里，又是一个相当不错的功能了。~~妈妈再也不用担心我看电脑看得错过火车了~~（12306 应用有动态的行程通知）
+
+不过啊果果，你都把 iPhone 的特性全丢 Mac 上面了，什么时候能把 iPhone 丢掉只用 Mac？
+
 ## 结语
 
 本次更新大量的明显改动都在视觉设计上，功能性的更改并不多，但也聊胜于无，相比隔壁 Windows 11 完全堆史山负优化的行为已经算是很不错的体验升级了。
