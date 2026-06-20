@@ -305,6 +305,12 @@ friends:
       desc: blog and about me
       image: https://www.shiina.xyz/avatar.png
       color: '#F4E0A7'
+    - site: 云灿の随笔小站
+      url: https://blog.yuncan.xyz/
+      owner: 云灿
+      desc: 浮云一别后，流水十年间
+      image: https://yuncan.xyz/images/icon/favicon.ico
+      color: '#c2fff3'
     # - site: 示例博客 A
     #   url: https://example-a.com
     #   owner: Alice
